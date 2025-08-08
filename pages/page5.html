@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>UI de la Chatbox</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Interface utilisateur de la chatbox</h1>
+    <h2>Structure de la chatbox</h2>
+    <p>Nous allons créer une interface utilisateur moderne et responsive avec React. L’interface comprend :</p>
+    <ul>
+      <li>Une zone d’affichage des messages</li>
+      <li>Un champ de saisie et bouton d’envoi</li>
+      <li>Une liste des utilisateurs connectés (plus tard)</li>
+    </ul>
+    <h2>Exemple de style CSS</h2>
+    <p>Le style est simple mais animé, avec transitions douces :</p>
+    <pre><code>
+#messages {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+#messages div {
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+}
+
+#messages div:hover {
+  background-color: #d0d0d0;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 70%;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+  box-shadow: 0 0 8px #4a90e2;
+  outline: none;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+    </code></pre>
+    <h2>Prochaine étape</h2>
+    <p>
+      Dans la <a href="page6.html">page suivante</a>, nous verrons comment connecter notre serveur à MongoDB et sauvegarder les messages.
+    </p>
+  </main>
+</body>
+</html>

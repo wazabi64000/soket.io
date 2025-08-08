@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Initialisation du projet</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Initialisation du projet : arborescence, backend et frontend</h1>
+    <h2>Objectif</h2>
+    <p>
+      Dans cette étape, nous allons préparer notre environnement de travail en créant la structure de fichiers pour notre projet de chat. Nous allons :
+    </p>
+    <ul>
+      <li>Initialiser un projet Node.js (ESM)</li>
+      <li>Préparer le serveur Express</li>
+      <li>Mettre en place un projet React avec Vite</li>
+      <li>Définir l’arborescence complète</li>
+    </ul>
+    <h2>Structure du projet</h2>
+    <p>Voici l’architecture que nous allons construire :</p>
+    <pre><code>chatbox/
+├── backend/
+│   ├── server.js
+│   ├── package.json
+│   └── ...
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── vite.config.js
+│   └── ...
+└── README.md</code></pre>
+    <h2>1. Création du dossier principal</h2>
+    <pre><code>mkdir chatbox
+cd chatbox</code></pre>
+    <h2>2. Initialisation du backend</h2>
+    <pre><code>mkdir backend
+cd backend
+npm init -y</code></pre>
+    <p>Modifier ensuite le fichier <code>package.json</code> pour activer les modules ESM :</p>
+    <pre><code>{
+  "type": "module",
+  "main": "server.js",
+  ...
+}</code></pre>
+    <h3>Installation des dépendances backend</h3>
+    <pre><code>npm install express cors socket.io mongoose</code></pre>
+    <h2>3. Création du serveur de base (server.js)</h2>
+    <p>Voici un squelette minimal du serveur Express en ESM :</p>
+    <pre><code>// backend/server.js
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+
+const app = express();
+const server = http.createServer(app);
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Serveur en ligne');
+});
+
+server.listen(3000, () => {
+  console.log('Serveur backend lancé sur http://localhost:3000');
+});
+</code></pre>
+    <h2>4. Création du frontend avec React + Vite</h2>
+    <p>Dans un autre terminal, depuis le dossier <code>chatbox</code> :</p>
+    <pre><code>npm create vite@latest frontend -- --template react
+cd frontend
+npm install
+npm install socket.io-client</code></pre>
+    <h2>5. Lancement simultané des serveurs</h2>
+    <p>Pour démarrer les deux projets :</p>
+    <ul>
+      <li><strong>Backend :</strong> <code>node backend/server.js</code></li>
+      <li><strong>Frontend :</strong> <code>npm run dev</code></li>
+    </ul>
+    <h2>6. Test rapide</h2>
+    <p>Vérifie que tu peux accéder à :</p>
+    <ul>
+      <li><code>http://localhost:3000</code> (réponse "Serveur en ligne")</li>
+      <li><code>http://localhost:5173</code> (ou port React selon Vite)</li>
+    </ul>
+    <h2>Prochaine étape</h2>
+    <p>
+      Dans la <a href="page3.html">page suivante</a>, nous allons intégrer Socket.io côté serveur et créer les premiers événements de connexion et de message.
+    </p>
+  </main>
+</body>
+</html>

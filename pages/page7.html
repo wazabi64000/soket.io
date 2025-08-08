@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestion utilisateurs & Notifications</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Gestion des utilisateurs connectés et notifications</h1>
+    <h2>Suivi des utilisateurs connectés</h2>
+    <p>Nous allons maintenir une liste d’utilisateurs en mémoire sur le serveur :</p>
+    <pre><code>const users = new Map();
+
+io.on('connection', (socket) => {
+  socket.on('login', (username) => {
+    users.set(socket.id, username);
+    io.emit('users', Array.from(users.values()));
+  });
+
+  socket.on('disconnect', () => {
+    users.delete(socket.id);
+    io.emit('users', Array.from(users.values()));
+  });
+});
+</code></pre>
+    <h2>Afficher la liste côté client</h2>
+    <p>Dans React, écoutez l’événement 'users' et affichez la liste :</p>
+    <pre><code>useEffect(() => {
+  socket.on('users', (list) => {
+    setUsers(list);
+  });
+  return () => socket.off('users');
+}, []);</code></pre>
+    <h2>Notifications de connexion/déconnexion</h2>
+    <p>Envoyez un message spécial lors des événements :</p>
+    <pre><code>socket.on('login', (username) => {
+  users.set(socket.id, username);
+  io.emit('users', Array.from(users.values()));
+  io.emit('message', `${username} est connecté.`);
+});
+socket.on('disconnect', () => {
+  const username = users.get(socket.id);
+  users.delete(socket.id);
+  io.emit('users', Array.from(users.values()));
+  io.emit('message', `${username} a quitté le chat.`);
+});</code></pre>
+    <h2>Prochaine étape</h2>
+    <p>Dans la <a href="page8.html">page suivante</a>, nous préparerons le déploiement de notre application.</p>
+  </main>
+</body>
+</html>

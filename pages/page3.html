@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Serveur Express + Socket.io</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Serveur Express + Socket.io</h1>
+    <h2>Installation et configuration de Socket.io côté serveur</h2>
+    <p>
+      Socket.io permet d'établir une communication en temps réel entre client et serveur via WebSocket ou fallback.
+      Nous allons maintenant intégrer Socket.io dans notre serveur Express existant.
+    </p>
+    <h2>1. Mise à jour du serveur `server.js`</h2>
+    <pre><code>// backend/server.js
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import { Server } from 'socket.io';
+
+const app = express();
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  }
+});
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Serveur en ligne');
+});
+
+// Gestion des connexions Socket.io
+io.on('connection', (socket) => {
+  console.log(`Nouvel utilisateur connecté : ${socket.id}`);
+
+  socket.on('message', (msg) => {
+    console.log(`Message reçu : ${msg}`);
+    // Réémettre à tous les clients connectés
+    io.emit('message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`Utilisateur déconnecté : ${socket.id}`);
+  });
+});
+
+server.listen(3000, () => {
+  console.log('Serveur backend lancé sur http://localhost:3000');
+});
+</code></pre>
+    <h2>2. Tester la connexion</h2>
+    <p>Nous testerons la connexion Socket.io côté client à la prochaine étape, dans le frontend React.</p>
+    <h2>Prochaine étape</h2>
+    <p>
+      Dans la <a href="page4.html">page suivante</a>, nous allons créer un client React qui se connecte au serveur Socket.io et échange des messages.
+    </p>
+  </main>
+</body>
+</html>

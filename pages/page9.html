@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bonus & Sécurité</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Bonus & Sécurité</h1>
+    <h2>1. Validation des données</h2>
+    <p>Utilisez des bibliothèques comme <code>Joi</code> ou <code>express-validator</code> pour valider les messages et les noms d’utilisateurs côté serveur.</p>
+    <h2>2. Protection contre les injections</h2>
+    <p>Assurez-vous d’échapper et de nettoyer toutes les données reçues avant de les enregistrer en base ou de les afficher.</p>
+    <h2>3. Authentification et gestion des sessions</h2>
+    <p>Implémentez une authentification avec JWT ou OAuth pour limiter l’accès au chat aux utilisateurs enregistrés.</p>
+    <h2>4. Limitation du débit (rate limiting)</h2>
+    <p>Pour éviter le spam, utilisez des middlewares comme <code>express-rate-limit</code> pour limiter la fréquence d’envoi des messages.</p>
+    <h2>5. Sécurisation de Socket.io</h2>
+    <ul>
+      <li>Vérifiez l’authentification lors de la connexion WebSocket</li>
+      <li>Gérez les permissions pour certaines actions</li>
+      <li>Utilisez des namespaces et des rooms pour segmenter les conversations</li>
+    </ul>
+    <h2>6. Sauvegarde et récupération</h2>
+    <p>Prévoyez des backups réguliers de la base MongoDB pour éviter la perte de données.</p>
+    <h2>7. Tests et surveillance</h2>
+    <p>Ajoutez des tests unitaires et d’intégration pour votre backend et frontend. Surveillez les performances et erreurs en production.</p>
+    <h2>Conclusion</h2>
+    <p>Ce guide vous a permis de construire une application de chat moderne complète, avec React, Express, Socket.io et MongoDB, sécurisée et prête à être déployée.</p>
+    <p>Bonne continuation et n’hésitez pas à améliorer encore votre application !</p>
+  </main>
+</body>
+</html>
