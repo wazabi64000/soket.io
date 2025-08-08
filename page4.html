@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Frontend React + Socket.io Client</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Frontend React + Socket.io Client</h1>
+    <h2>Installation du client Socket.io</h2>
+    <p>Dans votre projet React créé avec Vite, installez la bibliothèque :</p>
+    <pre><code>npm install socket.io-client</code></pre>
+    <h2>Création d'un composant React de connexion Socket.io</h2>
+    <p>Voici un exemple simple d'utilisation :</p>
+    <pre><code>import React, { useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
+
+export default function Chat() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+
+  useEffect(() => {
+    socket.on('message', (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    });
+
+    return () => {
+      socket.off('message');
+    };
+  }, []);
+
+  const sendMessage = () => {
+    if (input.trim() !== '') {
+      socket.emit('message', input);
+      setInput('');
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Chat temps réel&lt;/h2&gt;
+      &lt;div id="messages"&gt;
+        {messages.map((msg, idx) => (
+          &lt;div key={idx}&gt;{msg}&lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;input
+        type="text"
+        value={input}
+        onChange={(e) =&gt; setInput(e.target.value)}
+        onKeyDown={(e) =&gt; e.key === 'Enter' ? sendMessage() : null}
+        placeholder="Écrivez un message..."
+      /&gt;
+      &lt;button onClick={sendMessage}&gt;Envoyer&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+    <h2>Tester l'application</h2>
+    <p>Lancez votre serveur backend, puis le frontend (via <code>npm run dev</code>). Vous devriez pouvoir envoyer et recevoir des messages en temps réel.</p>
+    <h2>Prochaine étape</h2>
+    <p>Dans la <a href="page5.html">page suivante</a>, nous allons travailler sur l’interface utilisateur complète de la chatbox, avec styles et animations.</p>
+  </main>
+</body>
+</html>

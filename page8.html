@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Déploiement de l'application</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Déploiement de l'application</h1>
+    <h2>Préparer le projet pour la production</h2>
+    <p>Avant de déployer, il faut construire la version de production du frontend React :</p>
+    <pre><code>npm run build</code></pre>
+    <p>Cette commande génère un dossier <code>dist/</code> optimisé prêt à être servi par un serveur web.</p>
+    <h2>Servir le frontend avec Express</h2>
+    <p>Modifiez votre serveur Express pour servir les fichiers statiques produits par Vite :</p>
+    <pre><code>import path from 'path';
+import express from 'express';
+
+const app = express();
+
+app.use(express.static(path.resolve(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));</code></pre>
+    <h2>Déployer sur une plateforme cloud</h2>
+    <p>Vous pouvez déployer votre application sur des services comme :</p>
+    <ul>
+      <li>Heroku</li>
+      <li>Vercel</li>
+      <li>DigitalOcean</li>
+      <li>AWS Elastic Beanstalk</li>
+    </ul>
+    <p>Assurez-vous de configurer les variables d’environnement, notamment pour MongoDB.</p>
+    <h2>Conseils pour la production</h2>
+    <ul>
+      <li>Activez la gestion des erreurs et logs côté serveur</li>
+      <li>Utilisez un reverse proxy comme Nginx pour gérer HTTPS et la mise en cache</li>
+      <li>Pensez à sécuriser les connexions (ex: HTTPS, CORS)</li>
+    </ul>
+    <h2>Prochaine étape</h2>
+    <p>Dans la <a href="page9.html">page suivante</a>, découvrez des astuces avancées pour améliorer la sécurité et la robustesse de votre application.</p>
+  </main>
+</body>
+</html>

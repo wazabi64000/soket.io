@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>MongoDB & Sauvegarde</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Connexion à MongoDB & Sauvegarde des messages</h1>
+    <h2>Installation de Mongoose</h2>
+    <p>Dans le backend :</p>
+    <pre><code>npm install mongoose</code></pre>
+    <h2>Connexion à la base</h2>
+    <pre><code>// backend/server.js (ajoutez en haut)
+import mongoose from 'mongoose';
+
+// Connection MongoDB
+mongoose.connect('mongodb://localhost:27017/chatbox', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => {
+  console.log('Connecté à MongoDB');
+}).catch((err) => {
+  console.error('Erreur MongoDB:', err);
+});
+</code></pre>
+    <h2>Définition du modèle Message</h2>
+    <pre><code>import mongoose from 'mongoose';
+
+const messageSchema = new mongoose.Schema({
+  username: String,
+  text: String,
+  timestamp: { type: Date, default: Date.now }
+});
+
+const Message = mongoose.model('Message', messageSchema);
+
+export default Message;</code></pre>
+    <h2>Enregistrer les messages reçus</h2>
+    <pre><code>// backend/server.js (dans io.on('connection'))
+import Message from './models/Message.js'; // supposons ce chemin
+
+socket.on('message', async (msg) => {
+  try {
+    const message = new Message(msg);
+    await message.save();
+    io.emit('message', msg);
+  } catch (err) {
+    console.error('Erreur sauvegarde message:', err);
+  }
+});
+</code></pre>
+    <h2>Prochaine étape</h2>
+    <p>Dans la <a href="page7.html">page suivante</a>, nous gérerons les utilisateurs connectés et les notifications.</p>
+  </main>
+</body>
+</html>

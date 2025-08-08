@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Introduction & Socket.io</title>
+  <link rel="stylesheet" href="./assets/style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Introduction & Socket.io</a>
+    <a href="page2.html">Initialisation du projet</a>
+    <a href="page3.html">Serveur + Socket.io</a>
+    <a href="page4.html">Frontend React</a>
+    <a href="page5.html">UI de la Chatbox</a>
+    <a href="page6.html">MongoDB & Sauvegarde</a>
+    <a href="page7.html">Utilisateurs & Notifs</a>
+    <a href="page8.html">Déploiement</a>
+    <a href="page9.html">Bonus & Sécurité</a>
+  </nav>
+  <main>
+    <h1>Introduction au projet de chat en temps réel</h1>
+    <h2>Objectif du guide</h2>
+    <p>
+      Ce guide a pour objectif de vous apprendre à développer une application de messagerie en temps réel, avec envoi et réception instantanée de messages, gestion d’utilisateurs connectés, et stockage des données en base. Nous allons utiliser les technologies modernes suivantes :
+    </p>
+    <ul>
+      <li><strong>React</strong> : pour l’interface utilisateur</li>
+      <li><strong>Express (ESM)</strong> : pour le serveur Node.js</li>
+      <li><strong>Socket.io</strong> : pour la communication temps réel</li>
+      <li><strong>MongoDB</strong> : pour le stockage des messages</li>
+    </ul>
+    <h2>Présentation de Socket.io</h2>
+    <p>
+      Socket.io est une bibliothèque JavaScript qui permet de gérer des connexions WebSocket. Elle offre une abstraction qui simplifie le développement de fonctionnalités temps réel (comme un chat, des notifications, ou des mises à jour en direct).
+    </p>
+    <p>
+      Elle gère automatiquement la reconnexion, le fallback sur d'autres protocoles si WebSocket n'est pas disponible, et propose une API simple pour échanger des événements entre client et serveur.
+    </p>
+    <h3>Exemple de fonctionnement</h3>
+    <p>Une fois connecté, un client peut émettre un événement vers le serveur :</p>
+    <pre><code>socket.emit('message', 'Bonjour tout le monde');</code></pre>
+    <p>Et le serveur peut écouter cet événement :</p>
+    <pre><code>io.on('connection', (socket) => {
+  socket.on('message', (msg) => {
+    console.log('Message reçu :', msg);
+  });
+});</code></pre>
+    <h2>Installation de Socket.io</h2>
+    <h3>Sur le serveur (Node.js)</h3>
+    <p>Installez la bibliothèque via npm :</p>
+    <pre><code>npm install socket.io</code></pre>
+    <h3>Sur le client (React)</h3>
+    <p>Du côté client, installez le package suivant dans le dossier React :</p>
+    <pre><code>npm install socket.io-client</code></pre>
+    <h2>Pré-requis pour suivre ce guide</h2>
+    <ul>
+      <li>Node.js installé (version 16+ recommandée)</li>
+      <li>MongoDB local ou via Atlas</li>
+      <li>Connaissances de base en JavaScript et React</li>
+      <li>Terminal Linux ou macOS, ou WSL/Git Bash sous Windows</li>
+    </ul>
+    <h2>Organisation du guide</h2>
+    <p>
+      Ce guide est découpé en plusieurs pages. Chaque page correspond à une étape claire du développement de l’application. Vous pourrez tester à chaque étape.
+    </p>
+    <h2>Page suivante</h2>
+    <p>
+      Dans la <a href="page2.html">page 2</a>, nous allons créer l’arborescence du projet, configurer le serveur Express avec la syntaxe ES Modules, et préparer notre environnement de travail.
+    </p>
+  </main>
+</body>
+</html>
